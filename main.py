@@ -2,14 +2,13 @@
 main.py - Yojana Mitra API 🚀🇮🇳
 
 Chalao (yojana-mitra folder mein, venv on karke):
-    uvicorn main:app --reload --port 8001
+    python -m uvicorn main:app --reload --port 8001
 
 Docs: http://127.0.0.1:8001/docs
 (Port 8001 kyunki 8000 pe tumhara Swiggy API chal sakta hai 😉)
 """
 
 import os
-from contextlib import asynccontextmanager
 from typing import Literal
 
 from dotenv import load_dotenv
@@ -56,13 +55,7 @@ class AskResponse(BaseModel):
 # ---------------------------------------------------------------------------
 # 🚀 App
 # ---------------------------------------------------------------------------
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    rag.retrieve("PM-KISAN")  # 🔥 server start hote hi model + database load (pehla user wait na kare)
-    yield
-
-
-app = FastAPI(title="Yojana Mitra API 🇮🇳", lifespan=lifespan)
+app = FastAPI(title="Yojana Mitra API 🇮🇳")
 
 # 🚧 CORS: browser (security guard 👮) ko batao ki guest list mein kaun hai
 app.add_middleware(

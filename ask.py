@@ -8,7 +8,6 @@ Chalao (yojana-mitra folder mein, venv on karke):
 import rag
 
 print("🤖 Yojana Mitra ready ho raha hai...")
-rag.retrieve("PM-KISAN")  # warm-up: model + database pehle hi load (LLM call nahi, free!)
 print("✅ Ready! 🇮🇳 Sawaal poocho (band karne ke liye 'exit', nayi baat ke liye 'reset')\n")
 
 history = []  # 💬 is chat ki yaaddasht

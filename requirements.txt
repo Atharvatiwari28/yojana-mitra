@@ -1,0 +1,11 @@
+# Server (live API) ke liye sirf yeh chahiye: koi torch nahi, isliye 512 MB mein chal jata hai 🪶
+fastapi
+uvicorn
+groq
+google-genai
+numpy
+psycopg[binary]
+python-dotenv
+
+# PDF processing scripts (extract/ocr/chunk, purana embed.py) sirf laptop pe chalte hain.
+# Unke liye alag se: pip install pypdf pymupdf pytesseract pillow sentence-transformers

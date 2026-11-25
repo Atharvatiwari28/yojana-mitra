@@ -8,14 +8,16 @@ DRY: RAG ka code sirf ek jagah likha hai 🔁
 import os
 
 import groq
-import psycopg
 from dotenv import load_dotenv
+from google.genai import errors as gemini_errors
 from groq import Groq
-from sentence_transformers import SentenceTransformer
+
+from db import get_conn
+from embeddings import embed_query, to_pgvector
 
 load_dotenv()
 
-EMBED_MODEL = "intfloat/multilingual-e5-small"
+TABLE = "chunks_gemini"  # Gemini embeddings wali table (purani e5 wali: "chunks")
 LLM_MODEL = "openai/gpt-oss-120b"
 TOP_K = 8
 REFUSAL_TEXT = "Mujhe yeh jaankari in documents mein nahi mili."
@@ -52,28 +54,14 @@ Rules (zaroor follow karo):
 5. Source mein file ka naam aur page bilkul waise likho jaise document ke label mein hai.
 6. Numbers (paise, umar, income limit, date) bilkul wahi likho jo document mein hain."""
 
-# Models aur connection sirf ek baar banenge (pehli zaroorat pe) ⚡
-_model = None
+# LLM client sirf ek baar banega (pehli zaroorat pe) ⚡
 _ai_client = None
-_conn = None
 
 
 def _setup():
-    global _model, _ai_client, _conn
-    if _model is None:
-        _model = SentenceTransformer(EMBED_MODEL)
+    global _ai_client
+    if _ai_client is None:
         _ai_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        _conn = psycopg.connect(
-            host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT"),
-            dbname=os.getenv("DB_NAME"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-        )
-
-
-def _to_pgvector(numbers) -> str:
-    return "[" + ",".join(f"{x:.6f}" for x in numbers) + "]"
 
 
 def _ask_llm(system_prompt: str, user_prompt: str, temperature: float) -> str:
@@ -116,17 +104,18 @@ def rewrite(question: str, history: list[dict] | None = None) -> str:
 
 def retrieve(search_question: str, top_k: int = TOP_K) -> list[dict]:
     """🔍 pgvector se sabse milte-julte chunks"""
-    _setup()
-    q_emb = _model.encode("query: " + search_question, normalize_embeddings=True)
-    with _conn.cursor() as cursor:
+    q_emb = embed_query(search_question)
+    # Har request pe naya connection: cloud database (Neon) idle hone pe connection band kar deta hai,
+    # purana connection pakad ke baithe rahe toh "connection closed" error aata 🔌
+    with get_conn() as conn, conn.cursor() as cursor:
         cursor.execute(
-            """
+            f"""
             SELECT source, pages, text
-            FROM chunks
+            FROM {TABLE}
             ORDER BY embedding <=> %s::vector
             LIMIT %s
             """,
-            (_to_pgvector(q_emb), top_k),
+            (to_pgvector(q_emb), top_k),
         )
         rows = cursor.fetchall()
     return [{"source": s, "pages": p, "text": t} for s, p, t in rows]
@@ -153,7 +142,11 @@ def answer(question: str, history: list[dict] | None = None) -> dict:
     """🇮🇳 Poora RAG: rewrite (history ke saath) → retrieve → generate (evidence pehle, phir jawab)"""
     _setup()
     search_q = rewrite(question, history)
-    chunks = retrieve(search_q)
+    try:
+        chunks = retrieve(search_q)
+    except gemini_errors.APIError:
+        return {"question": question, "search_question": search_q, "evidence": "",
+                "answer": "🔧 Search service abhi available nahi hai, thodi der baad try karein.", "chunks": []}
     user_prompt = (
         f"Documents:\n\n{build_context(chunks)}\n\n---\n\n"
         f"User ka sawaal: {question}\n(Poora matlab: {search_q})"
