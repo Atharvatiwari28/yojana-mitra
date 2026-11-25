@@ -1,0 +1,329 @@
+[
+ {
+  "id": 1,
+  "question": "kisaan ko saal mein kitna paisa milta hai?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "6000"
+   ]
+  ]
+ },
+ {
+  "id": 2,
+  "question": "PM-KISAN ka paisa kitni kishton mein aata hai?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "2000"
+   ],
+   [
+    "3",
+    "three",
+    "teen"
+   ]
+  ]
+ },
+ {
+  "id": 3,
+  "question": "PM-KISAN mein family ka matlab kya hai?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "wife",
+    "patni",
+    "biwi",
+    "spouse",
+    "pati"
+   ],
+   [
+    "minor",
+    "nabalig",
+    "children",
+    "bachch"
+   ]
+  ]
+ },
+ {
+  "id": 4,
+  "question": "Kya income tax bharne wale log PM-KISAN le sakte hain?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "nahi",
+    "not",
+    "exclude",
+    "na "
+   ]
+  ]
+ },
+ {
+  "id": 5,
+  "question": "retired pensioner jinki pension 10000 se zyada hai, kya woh PM-KISAN ke liye eligible hain?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "10000"
+   ]
+  ]
+ },
+ {
+  "id": 6,
+  "question": "PM-KISAN mein eligibility ki cut-off date kya hai?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "01.02.2019",
+    "1.2.2019",
+    "february 2019",
+    "feb 2019",
+    "1 feb"
+   ]
+  ]
+ },
+ {
+  "id": 7,
+  "question": "Kya doctor aur engineer ko PM-KISAN ka paisa milta hai?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "nahi",
+    "not",
+    "exclude"
+   ]
+  ]
+ },
+ {
+  "id": 8,
+  "question": "NRI kisaan ko PM-KISAN milega kya?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "nahi",
+    "not",
+    "exclude"
+   ]
+  ]
+ },
+ {
+  "id": 9,
+  "question": "Which months are PM-KISAN installments paid in?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "april"
+   ],
+   [
+    "august"
+   ],
+   [
+    "december"
+   ]
+  ]
+ },
+ {
+  "id": 10,
+  "question": "PM-KISAN registration ke liye kaun se documents chahiye?",
+  "expected_sources": [
+   "pm_kisan_guidelines.pdf",
+   "pm_kisan_faq.pdf"
+  ],
+  "must_include": [
+   [
+    "aadhaar",
+    "aadhar"
+   ]
+  ]
+ },
+ {
+  "id": 11,
+  "question": "PMAY urban mein EWS ke liye income limit kya hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "3 lakh",
+    "3.0 lakh",
+    "300000",
+    "3 laakh"
+   ]
+  ]
+ },
+ {
+  "id": 12,
+  "question": "LIG category ki income range kya hai PMAY mein?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "6 lakh",
+    "6.0 lakh",
+    "600000"
+   ]
+  ]
+ },
+ {
+  "id": 13,
+  "question": "MIG ke liye maximum income kitni ho sakti hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "9 lakh",
+    "900000"
+   ]
+  ]
+ },
+ {
+  "id": 14,
+  "question": "home loan pe interest subsidy kitne percent milti hai PMAY-U 2.0 mein?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "4%",
+    "4 %",
+    "4 percent",
+    "4.0%",
+    "4.0 %"
+   ]
+  ]
+ },
+ {
+  "id": 15,
+  "question": "interest subsidy ke liye maximum loan amount kitna ho sakta hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "25 lakh"
+   ]
+  ]
+ },
+ {
+  "id": 16,
+  "question": "Interest Subsidy Scheme mein maximum kitni subsidy milti hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "1.80 lakh",
+    "1.8 lakh",
+    "180000"
+   ]
+  ]
+ },
+ {
+  "id": 17,
+  "question": "PMAY ka ghar kiske naam pe hona chahiye?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "female",
+    "mahila",
+    "woman",
+    "women",
+    "aurat",
+    "wife",
+    "patni"
+   ]
+  ]
+ },
+ {
+  "id": 18,
+  "question": "PMAY-U 2.0 mein kin logon ko preference milti hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "widow",
+    "vidhwa"
+   ]
+  ]
+ },
+ {
+  "id": 19,
+  "question": "PMAY-U 2.0 scheme kitne saal ke liye chalegi?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "5 saal",
+    "5 years",
+    "5 year",
+    "paanch",
+    "five",
+    "2029"
+   ]
+  ]
+ },
+ {
+  "id": 20,
+  "question": "affordable house ka carpet area metro city mein kitna hota hai?",
+  "expected_sources": [
+   "pmay_urban_2_guidelines.pdf"
+  ],
+  "must_include": [
+   [
+    "60"
+   ]
+  ]
+ },
+ {
+  "id": 21,
+  "question": "mujhe scholarship kaise milegi?",
+  "trap": true
+ },
+ {
+  "id": 22,
+  "question": "Ayushman Bharat card kaise banwayein?",
+  "trap": true
+ },
+ {
+  "id": 23,
+  "question": "Mudra loan ka interest rate kya hai?",
+  "trap": true
+ },
+ {
+  "id": 24,
+  "question": "aaj petrol ka rate kya hai?",
+  "trap": true
+ }
+]

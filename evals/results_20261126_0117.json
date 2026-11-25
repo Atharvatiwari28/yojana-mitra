@@ -1,0 +1,745 @@
+[
+  {
+    "id": 1,
+    "question": "kisaan ko saal mein kitna paisa milta hai?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "6000"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "How much money does a farmer receive per year under the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"Under the PM-KISAN scheme, all landholding farmers' families shall be provided the financial benefit of Rs.6000/- per annum per family payable in three equal installments of Rs.2000/- each, every four months.\" (Source: pm_kisan_faq.pdf, page 2)",
+    "answer": "Kisaan ko saal mein Rs.6000/- milta hai. (Source: pm_kisan_faq.pdf, page 2)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[8]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[10]",
+      "pm_kisan_guidelines.pdf p[9, 10]"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "PM-KISAN ka paisa kitni kishton mein aata hai?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "2000"
+      ],
+      [
+        "3",
+        "three",
+        "teen"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "In how many installments is the PM‑KISAN payment disbursed?",
+    "evidence": "EVIDENCE: \"Under the PM-KISAN scheme, all landholding farmers' families shall be provided the financial benefit of Rs.6000/- per annum per family payable in three equal installments of Rs.2000/- each, every four months.\" (Source: pm_kisan_faq.pdf, page 2)",
+    "answer": "PM‑KISAN ka paisa 6000 ₹ per year teen (3) barabar kiston mein milta hai, har 4 mahine mein 2000 ₹ ki installment. (Source: pm_kisan_faq.pdf, page 2)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_guidelines.pdf p[7, 8]",
+      "pm_kisan_guidelines.pdf p[5]"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "PM-KISAN mein family ka matlab kya hai?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "wife",
+        "patni",
+        "biwi",
+        "spouse",
+        "pati"
+      ],
+      [
+        "minor",
+        "nabalig",
+        "children",
+        "bachch"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": false,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the definition of “family” under the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"All landholding farmers' families, which have cultivable landholding in their names are eligible to get benefit under the scheme.\" (Source: pm_kisan_faq.pdf, page 1)",
+    "answer": "PM‑KISAN mein “family” ka matlab hai wo kisan ki parivar jo apne naam par cultivable (kheti‑yogya) zameen rakhte hain. (Source: pm_kisan_faq.pdf, page 1)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_guidelines.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[4]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[4, 5]",
+      "pm_kisan_guidelines.pdf p[4, 5]",
+      "pm_kisan_faq.pdf p[1]"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Kya income tax bharne wale log PM-KISAN le sakte hain?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "nahi",
+        "not",
+        "exclude",
+        "na "
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Are income tax payers eligible to receive benefits under the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"V. All Persons who paid Income Tax in last assessment year.\" (Source: pm_kisan_faq.pdf, page 2)",
+    "answer": "Nahi, jo log income tax bharte hain, woh PM‑Kisan scheme ke liye eligible nahi hain. (Source: pm_kisan_faq.pdf, page 2)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[1, 2]",
+      "pm_kisan_guidelines.pdf p[2, 3]",
+      "pm_kisan_guidelines.pdf p[8]",
+      "pm_kisan_guidelines.pdf p[3]",
+      "pm_kisan_faq.pdf p[4]"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "retired pensioner jinki pension 10000 se zyada hai, kya woh PM-KISAN ke liye eligible hain?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "10000"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Are retired pensioners with a pension exceeding ₹10,000 eligible for the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"iv. All superannuated/retired pensioners whose monthly pension is Rs.10,000/- or more(Excluding Multi Tasking Staff / Class |V/Group D employees)\" (Source: pm_kisan_faq.pdf, page 2)  \nEVIDENCE: \"iv) All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees)\" (Source: pm_kisan_guidelines.pdf, page 2, 3)",
+    "answer": "Retired pensioners jinki monthly pension Rs 10,000 ya usse zyada hai, woh PM‑Kisan ke liye eligible hain (bas Multi‑Tasking Staff / Class IV / Group D employees ko chhod kar). (Source: pm_kisan_faq.pdf, page 2; pm_kisan_guidelines.pdf, page 2, 3)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[2, 3]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[1, 2]",
+      "pm_kisan_faq.pdf p[6, 7]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[4]"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "PM-KISAN mein eligibility ki cut-off date kya hai?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "01.02.2019",
+        "1.2.2019",
+        "february 2019",
+        "feb 2019",
+        "1 feb"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the eligibility cut‑off date for the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"In case of transfer of cultivable land for reasons other than death **after 01.02.2019**, the officials have to reassess the eligibility of the transferor...\" (Source: pm_kisan_guidelines.pdf, page 4, 5)",
+    "answer": "PM‑KISAN ki eligibility ka cut‑off date **01 February 2019** hai. (Source: pm_kisan_guidelines.pdf, page 4, 5)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[4, 5]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_guidelines.pdf p[4]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_guidelines.pdf p[4, 5]"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Kya doctor aur engineer ko PM-KISAN ka paisa milta hai?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "nahi",
+        "not",
+        "exclude"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Do doctors and engineers receive any payments under the PM‑KISAN scheme?",
+    "evidence": "EVIDENCE: \"vi) Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.\" (Source: pm_kisan_guidelines.pdf, page 2, 3)  \nEVIDENCE: \"All landholding farmers' families, which have cultivable landholding in their names are eligible to get benefit under the scheme.\" (Source: pm_kisan_faq.pdf, page 1)",
+    "answer": "Doctor aur engineer sirf tabhi PM‑Kisan ka paisa le sakte hain jab unke paas apne naam par cultivable zameen ho; sirf profession hone se unhe yeh benefit nahi milta. (Source: pm_kisan_guidelines.pdf, page 2, 3; pm_kisan_faq.pdf, page 1)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[7, 8]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[2, 3]",
+      "pm_kisan_guidelines.pdf p[5]",
+      "pm_kisan_faq.pdf p[8]"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "NRI kisaan ko PM-KISAN milega kya?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "nahi",
+        "not",
+        "exclude"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Will an NRI farmer be eligible for PM‑KISAN?",
+    "evidence": "EVIDENCE: \"In case of new beneficiaries being uploaded on the PM-KISAN Portal, all land holding farmers' families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961 shall be excluded from any benefit under the Scheme.\" (Source: pm_kisan_guidelines.pdf, page 3)",
+    "answer": "NRI kisaan ko PM‑KISAN ka benefit nahi milega. (Source: pm_kisan_guidelines.pdf, page 3)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_guidelines.pdf p[3]",
+      "pm_kisan_guidelines.pdf p[9, 10]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_faq.pdf p[1, 2]",
+      "pm_kisan_faq.pdf p[5]",
+      "pm_kisan_guidelines.pdf p[5]"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Which months are PM-KISAN installments paid in?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "april"
+      ],
+      [
+        "august"
+      ],
+      [
+        "december"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "In which months are the PM‑KISAN installments paid?",
+    "evidence": "EVIDENCE: \"The period of 1st installment under the scheme is from 01.12.2018 to 31.03.2019, that of 2nd installment from 01.04.2019 to 31.07.2019, 3rd installment from 01.08.2019 to 30.11.2019, and so on.\" (Source: pm_kisan_faq.pdf, page 2)  \nEVIDENCE: \"payable in three equal installments of Rs.2000/- each, every four months.\" (Source: pm_kisan_faq.pdf, page 2)",
+    "answer": "PM‑KISAN installments are paid every four months, i.e., for the periods December‑March, April‑July, August‑November, and then the cycle repeats. (Source: pm_kisan_faq.pdf, page 2)",
+    "retrieved": [
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[8]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[1]",
+      "pm_kisan_guidelines.pdf p[5]",
+      "pm_kisan_guidelines.pdf p[7, 8]"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "PM-KISAN registration ke liye kaun se documents chahiye?",
+    "expected_sources": [
+      "pm_kisan_guidelines.pdf",
+      "pm_kisan_faq.pdf"
+    ],
+    "must_include": [
+      [
+        "aadhaar",
+        "aadhar"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What documents are required for PM‑KISAN registration?",
+    "evidence": "EVIDENCE: \"The following information / documents are required to be furnished by the farmers for enrollment under PM-Kisan Scheme: (i) Name, Age, Gender and Category (SC/ST) (ii) Aadhaar Number ... (iii) Bank Account Number and IFSC Code.\" (Source: pm_kisan_faq.pdf, page 4)",
+    "answer": "PM‑Kisan registration ke liye farmer ko apna naam, umar, gender, caste (SC/ST), Aadhaar number (ya uske bina driving licence, voter ID, NREGA job card jaise alternate ID) aur bank account number aur IFSC code dena hota hai. (Source: pm_kisan_faq.pdf, page 4)",
+    "retrieved": [
+      "pm_kisan_guidelines.pdf p[9, 10]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_faq.pdf p[2]",
+      "pm_kisan_faq.pdf p[5]",
+      "pm_kisan_faq.pdf p[4, 5]",
+      "pm_kisan_guidelines.pdf p[9]",
+      "pm_kisan_faq.pdf p[4]",
+      "pm_kisan_guidelines.pdf p[4]"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "PMAY urban mein EWS ke liye income limit kya hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "3 lakh",
+        "3.0 lakh",
+        "300000",
+        "3 laakh"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the income limit for the Economically Weaker Section under the Pradhan Mantri Awas Yojana (Urban)?",
+    "evidence": "EVIDENCE: \"EWS households are defined as households with an annual income of up to ₹3 lakh.\" (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "answer": "PMAY‑Urban ke EWS category ke liye income limit ₹3 lakh per year tak hai. (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]",
+      "pmay_urban_2_guidelines.pdf p[10, 11]",
+      "pmay_urban_2_guidelines.pdf p[5]",
+      "pmay_urban_2_guidelines.pdf p[42]",
+      "pmay_urban_2_guidelines.pdf p[109]",
+      "pmay_urban_2_guidelines.pdf p[15]",
+      "pmay_urban_2_guidelines.pdf p[64]",
+      "pmay_urban_2_guidelines.pdf p[17]"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "LIG category ki income range kya hai PMAY mein?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "6 lakh",
+        "6.0 lakh",
+        "600000"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the income range for the LIG category under the Pradhan Mantri Awas Yojana (PMAY)?",
+    "evidence": "EVIDENCE: \"LIG is defined as households with an annual income from ₹3 lakh up to ₹6 lakh.\" (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "answer": "LIG category ki income range ₹3 lakh se ₹6 lakh tak hai. (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[17]",
+      "pmay_urban_2_guidelines.pdf p[16, 17]",
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]",
+      "pmay_urban_2_guidelines.pdf p[10, 11]",
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[64]",
+      "pmay_urban_2_guidelines.pdf p[15]",
+      "pmay_urban_2_guidelines.pdf p[13]"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "MIG ke liye maximum income kitni ho sakti hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "9 lakh",
+        "900000"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the maximum income eligibility limit for the MIG scheme?",
+    "evidence": "EVIDENCE: \"MIG is defined as households with an annual income from ₹6 lakh up to ₹9 lakh.\" (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "answer": "MIG ke liye maximum annual income ₹9 lakh hai. (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[17]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[16, 17]",
+      "pmay_urban_2_guidelines.pdf p[5]",
+      "pmay_urban_2_guidelines.pdf p[20]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[71]"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "home loan pe interest subsidy kitne percent milti hai PMAY-U 2.0 mein?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "4%",
+        "4 %",
+        "4 percent",
+        "4.0%",
+        "4.0 %"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": false,
+    "citation_ok": false,
+    "false_refusal": true,
+    "search_question": "What percentage interest subsidy is provided on home loans under the PMAY-U (Pradhan Mantri Awas Yojana – Urban) scheme?",
+    "evidence": "",
+    "answer": "Mujhe yeh jaankari in documents mein nahi mili.",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[64]",
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[15]",
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]",
+      "pmay_urban_2_guidelines.pdf p[62]",
+      "pmay_urban_2_guidelines.pdf p[5]",
+      "pmay_urban_2_guidelines.pdf p[42]",
+      "pmay_urban_2_guidelines.pdf p[7, 9]"
+    ]
+  },
+  {
+    "id": 15,
+    "question": "interest subsidy ke liye maximum loan amount kitna ho sakta hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "25 lakh"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": false,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the maximum loan amount eligible for an interest subsidy?",
+    "evidence": "EVIDENCE: \"The interest subsidy shall be at the rate of 4% (four percent) on the principal amount of the home loan for EWS, LIG and MIG segment, admissible for a maximum loan amount of ₹8 (Eight) lakh, where maximum loan can be given up to ₹25 (Twenty Five) lakh, for the period of 12 (Twelve) years or full period of the loan, whichever is lesser, where minimum tenure of loan should be for 5 (Five) years.\" (Source: pmay_urban_2_guidelines.pdf, page 65)",
+    "answer": "Interest subsidy ke liye maximum loan amount ₹8 lakh hai. (Source: pmay_urban_2_guidelines.pdf, page 65)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[65, 66]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[49]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[38, 39]",
+      "pmay_urban_2_guidelines.pdf p[65]",
+      "pmay_urban_2_guidelines.pdf p[66]"
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Interest Subsidy Scheme mein maximum kitni subsidy milti hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "1.80 lakh",
+        "1.8 lakh",
+        "180000"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the maximum subsidy amount provided under the Interest Subvention Scheme for farmers?",
+    "evidence": "EVIDENCE: \"A maximum release of interest subsidy of ₹1.80 lakh having maximum NPV of ₹1.50 lakh (at Discount Rate of 8.5%) shall be provided to eligible beneficiaries having a loan tenure of more than five years.\" (Source: pmay_urban_2_guidelines.pdf, page 37)  \nEVIDENCE: \"Maximum benefit of interest subsidy (₹) – Actual Release ₹1.80 lakh\" (Source: pmay_urban_2_guidelines.pdf, page 37)",
+    "answer": "Interest Subsidy Scheme mein maximum subsidy ₹1.80 lakh tak milti hai. (Source: pmay_urban_2_guidelines.pdf, page 37)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[65, 66]",
+      "pmay_urban_2_guidelines.pdf p[37]",
+      "pmay_urban_2_guidelines.pdf p[20]",
+      "pm_kisan_guidelines.pdf p[2]",
+      "pmay_urban_2_guidelines.pdf p[39]",
+      "pmay_urban_2_guidelines.pdf p[15]"
+    ]
+  },
+  {
+    "id": 17,
+    "question": "PMAY ka ghar kiske naam pe hona chahiye?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "female",
+        "mahila",
+        "woman",
+        "women",
+        "aurat",
+        "wife",
+        "patni"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": false,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Under the Pradhan Mantri Awas Yojana (PMAY), whose name should be on the house?",
+    "evidence": "EVIDENCE: \"That there is no pucca house in my name or any family member name in any part of India.\" (Source: pmay_urban_2_guidelines.pdf, page 70)",
+    "answer": "PMAY ke tahat ghar beneficiary (jo scheme ke liye apply karta hai) ke naam pe hona chahiye. (Source: pmay_urban_2_guidelines.pdf, page 70)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]",
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[15]",
+      "pmay_urban_2_guidelines.pdf p[69, 70]",
+      "pmay_urban_2_guidelines.pdf p[70, 71]",
+      "pmay_urban_2_guidelines.pdf p[5]",
+      "pmay_urban_2_guidelines.pdf p[64]",
+      "pmay_urban_2_guidelines.pdf p[107, 108]"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "PMAY-U 2.0 mein kin logon ko preference milti hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "widow",
+        "vidhwa"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "Which categories of people are given preference under the PMAY-U 2.0 scheme?",
+    "evidence": "EVIDENCE: \"3.4 Preference under the Scheme will be given to Widows, single women, Persons with Disabilities, Senior Citizens, Transgenders, persons belonging to Scheduled Castes/ Scheduled Tribes, Minorities and other weaker and vulnerable sections of the society.\" (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "answer": "PMAY-U 2.0 mein widows, single women, persons with disabilities, senior citizens, transgenders, SC/ST, minorities aur anya kamzor‑vulnerable groups ko preference milti hai. (Source: pmay_urban_2_guidelines.pdf, page 17)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[17]",
+      "pmay_urban_2_guidelines.pdf p[16, 17]",
+      "pmay_urban_2_guidelines.pdf p[60]",
+      "pmay_urban_2_guidelines.pdf p[42]",
+      "pmay_urban_2_guidelines.pdf p[19]",
+      "pmay_urban_2_guidelines.pdf p[17]",
+      "pmay_urban_2_guidelines.pdf p[17]"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "PMAY-U 2.0 scheme kitne saal ke liye chalegi?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "5 saal",
+        "5 years",
+        "5 year",
+        "paanch",
+        "five",
+        "2029"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "How many years will the PMAY-U 2.0 scheme be implemented for?",
+    "evidence": "EVIDENCE: \"PMAY-U 2.0 – 'Housing for All' Mission for urban areas will be implemented for 5 years from 01.09.2024 to provide Central Assistance to all eligible beneficiaries/households/ implementing agencies through States/Union Territories (UTs)/Primary Lending Institutions (PLIs) to construct, purchase or rent a house at an affordable cost.\" (Source: pmay_urban_2_guidelines.pdf, page 15)",
+    "answer": "PMAY-U 2.0 scheme 5 saal ke liye chalegi, 01‑09‑2024 se shuru hoke. (Source: pmay_urban_2_guidelines.pdf, page 15)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[19]",
+      "pmay_urban_2_guidelines.pdf p[61]",
+      "pmay_urban_2_guidelines.pdf p[60]",
+      "pmay_urban_2_guidelines.pdf p[15]",
+      "pmay_urban_2_guidelines.pdf p[69]",
+      "pmay_urban_2_guidelines.pdf p[19, 20]",
+      "pmay_urban_2_guidelines.pdf p[42]"
+    ]
+  },
+  {
+    "id": 20,
+    "question": "affordable house ka carpet area metro city mein kitna hota hai?",
+    "expected_sources": [
+      "pmay_urban_2_guidelines.pdf"
+    ],
+    "must_include": [
+      [
+        "60"
+      ]
+    ],
+    "trap": false,
+    "retrieval_hit": true,
+    "answer_correct": true,
+    "citation_ok": true,
+    "false_refusal": false,
+    "search_question": "What is the carpet area of an affordable house in a metro city under the PMAY‑U scheme?",
+    "evidence": "EVIDENCE: \"A house having carpet area up to 60 sqm in Metros and 90 sqm in non-metro with house value of up to ₹45 lakh.\" (Source: pmay_urban_2_guidelines.pdf, page 9)",
+    "answer": "Metro city mein affordable house ka carpet area maximum 60 sqm hota hai. (Source: pmay_urban_2_guidelines.pdf, page 9)",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[7, 9]",
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[57, 58]",
+      "pmay_urban_2_guidelines.pdf p[9]",
+      "pmay_urban_2_guidelines.pdf p[28]",
+      "pmay_urban_2_guidelines.pdf p[29]",
+      "pmay_urban_2_guidelines.pdf p[18]",
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]"
+    ]
+  },
+  {
+    "id": 21,
+    "question": "mujhe scholarship kaise milegi?",
+    "trap": true,
+    "refused": true,
+    "search_question": "How can I obtain a scholarship?",
+    "evidence": "",
+    "answer": "Mujhe yeh jaankari in documents mein nahi mili.",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[70]",
+      "pmay_urban_2_guidelines.pdf p[95]",
+      "pmay_urban_2_guidelines.pdf p[69]",
+      "pmay_urban_2_guidelines.pdf p[72]",
+      "pmay_urban_2_guidelines.pdf p[93]",
+      "pmay_urban_2_guidelines.pdf p[30]",
+      "pm_kisan_guidelines.pdf p[11]",
+      "pmay_urban_2_guidelines.pdf p[54]"
+    ]
+  },
+  {
+    "id": 22,
+    "question": "Ayushman Bharat card kaise banwayein?",
+    "trap": true,
+    "refused": true,
+    "search_question": "How can I obtain an Ayushman Bharat card?",
+    "evidence": "",
+    "answer": "Mujhe yeh jaankari in documents mein nahi mili.",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[73, 74]",
+      "pmay_urban_2_guidelines.pdf p[73]",
+      "pm_kisan_faq.pdf p[4, 5]",
+      "pmay_urban_2_guidelines.pdf p[69, 70]",
+      "pmay_urban_2_guidelines.pdf p[70]",
+      "pm_kisan_faq.pdf p[4, 5]",
+      "pmay_urban_2_guidelines.pdf p[72]",
+      "pmay_urban_2_guidelines.pdf p[70, 71]"
+    ]
+  },
+  {
+    "id": 23,
+    "question": "Mudra loan ka interest rate kya hai?",
+    "trap": true,
+    "refused": true,
+    "search_question": "What is the interest rate for a loan under the Pradhan Mantri Mudra Yojana?",
+    "evidence": "",
+    "answer": "Mujhe yeh jaankari in documents mein nahi mili.",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[64]",
+      "pmay_urban_2_guidelines.pdf p[5, 7]",
+      "pmay_urban_2_guidelines.pdf p[62]",
+      "pmay_urban_2_guidelines.pdf p[1, 3, 5]",
+      "pmay_urban_2_guidelines.pdf p[5]",
+      "pmay_urban_2_guidelines.pdf p[13]",
+      "pmay_urban_2_guidelines.pdf p[100, 101]",
+      "pmay_urban_2_guidelines.pdf p[66]"
+    ]
+  },
+  {
+    "id": 24,
+    "question": "aaj petrol ka rate kya hai?",
+    "trap": true,
+    "refused": true,
+    "search_question": "What is the current price of petrol today?",
+    "evidence": "",
+    "answer": "Mujhe yeh jaankari in documents mein nahi mili.",
+    "retrieved": [
+      "pmay_urban_2_guidelines.pdf p[11, 12]",
+      "pmay_urban_2_guidelines.pdf p[65, 66]",
+      "pmay_urban_2_guidelines.pdf p[61]",
+      "pmay_urban_2_guidelines.pdf p[76, 77]",
+      "pmay_urban_2_guidelines.pdf p[13]",
+      "pmay_urban_2_guidelines.pdf p[58]",
+      "pmay_urban_2_guidelines.pdf p[57, 58]",
+      "pmay_urban_2_guidelines.pdf p[66]"
+    ]
+  }
+]
