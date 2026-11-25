@@ -6,6 +6,7 @@ DRY: RAG ka code sirf ek jagah likha hai 🔁
 """
 
 import os
+import re
 
 import groq
 from dotenv import load_dotenv
@@ -18,7 +19,9 @@ from embeddings import embed_query, to_pgvector
 load_dotenv()
 
 TABLE = "chunks_gemini"  # Gemini embeddings wali table (purani e5 wali: "chunks")
-LLM_MODEL = "openai/gpt-oss-120b"
+# 🔁 Fallback chain: pehla model limit pe pahunch jaye toh agla try karo
+# (Groq free tier mein har model ki apni alag limit hoti hai)
+LLM_MODELS = ["openai/gpt-oss-120b", "qwen/qwen3.8-27b", "openai/gpt-oss-20b"]
 TOP_K = 8
 REFUSAL_TEXT = "Mujhe yeh jaankari in documents mein nahi mili."
 
@@ -65,16 +68,33 @@ def _setup():
 
 
 def _ask_llm(system_prompt: str, user_prompt: str, temperature: float) -> str:
-    response = _ai_client.chat.completions.create(
-        model=LLM_MODEL,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=temperature,
-        timeout=30,
-    )
-    return response.choices[0].message.content.strip()
+    """LLM se jawab lo. Rate limit lagi toh list ka agla model try karo 🔁"""
+    last_error = None
+    for model in LLM_MODELS:
+        extra = {}
+        if model.startswith("openai/gpt-oss"):
+            extra["reasoning_effort"] = "low"   # kam socho = kam tokens 💰 (humara kaam simple hai)
+        elif model.startswith("qwen/"):
+            extra["reasoning_format"] = "hidden"  # "sochne" wala text jawab mein mat daalo
+        try:
+            response = _ai_client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=temperature,
+                timeout=30,
+                **extra,
+            )
+        except (groq.RateLimitError, groq.NotFoundError, groq.BadRequestError) as e:
+            print(f"⚠️ {model} available nahi ({type(e).__name__}), agla model try kar raha hoon")
+            last_error = e
+            continue
+        text = response.choices[0].message.content or ""
+        text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)  # safety: think tags hatao
+        return text.strip()
+    raise last_error
 
 
 def format_history(history: list[dict] | None) -> str:
