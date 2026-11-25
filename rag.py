@@ -27,7 +27,12 @@ Rules:
 - If the question clearly refers to a scheme, mention its official name (e.g. PM-KISAN, PMAY-U 2.0).
 - Write it as ONE complete, natural English question, not keywords.
 - Example: "kisaan ko saal mein kitna paisa milta hai?" -> "How much money does a farmer receive per year under PM-KISAN?"
+- If a conversation history is given, use it to understand follow-up questions ("aur kaun eligible hai?",
+  "iske liye documents?") and write a STANDALONE question that makes sense without the history.
+  Only use scheme names that actually appear in the history or the question.
 - Output ONLY the question, nothing else."""
+
+MAX_HISTORY_TURNS = 4  # sirf aakhri 4 messages yaad rakho (tokens = paisa 💰)
 
 ANSWER_PROMPT = f"""Tum "Yojana Mitra" ho, ek assistant jo Indian sarkari schemes samjhata hai.
 
@@ -84,11 +89,27 @@ def _ask_llm(system_prompt: str, user_prompt: str, temperature: float) -> str:
     return response.choices[0].message.content.strip()
 
 
-def rewrite(question: str) -> str:
-    """✍️ Hinglish/Hindi sawaal → saaf English search question (fail ho toh original)"""
+def format_history(history: list[dict] | None) -> str:
+    """[{"role": "user", "content": "..."}, ...] → padhne layak text (sirf aakhri kuch messages)"""
+    if not history:
+        return ""
+    lines = []
+    for msg in history[-MAX_HISTORY_TURNS:]:
+        who = "User" if msg["role"] == "user" else "Yojana Mitra"
+        lines.append(f"{who}: {msg['content'][:500]}")  # bahut lamba message chhota karo
+    return "\n".join(lines)
+
+
+def rewrite(question: str, history: list[dict] | None = None) -> str:
+    """✍️ Hinglish/Hindi sawaal (+ chat history) → saaf, standalone English search question"""
     _setup()
+    history_text = format_history(history)
+    user_prompt = (
+        f"Conversation history:\n{history_text}\n\nNew question: {question}"
+        if history_text else question
+    )
     try:
-        return _ask_llm(REWRITE_PROMPT, question, temperature=0)
+        return _ask_llm(REWRITE_PROMPT, user_prompt, temperature=0)
     except groq.APIError:
         return question
 
@@ -128,12 +149,15 @@ def split_reply(reply: str) -> tuple[str, str]:
     return "", reply.strip()  # format follow nahi kiya toh poora reply hi jawab
 
 
-def answer(question: str) -> dict:
-    """🇮🇳 Poora RAG: rewrite → retrieve → generate (evidence pehle, phir jawab)"""
+def answer(question: str, history: list[dict] | None = None) -> dict:
+    """🇮🇳 Poora RAG: rewrite (history ke saath) → retrieve → generate (evidence pehle, phir jawab)"""
     _setup()
-    search_q = rewrite(question)
+    search_q = rewrite(question, history)
     chunks = retrieve(search_q)
-    user_prompt = f"Documents:\n\n{build_context(chunks)}\n\n---\n\nUser ka sawaal: {question}"
+    user_prompt = (
+        f"Documents:\n\n{build_context(chunks)}\n\n---\n\n"
+        f"User ka sawaal: {question}\n(Poora matlab: {search_q})"
+    )
     try:
         reply = _ask_llm(ANSWER_PROMPT, user_prompt, temperature=0)
         evidence, jawab = split_reply(reply)

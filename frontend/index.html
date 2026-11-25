@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yojana Mitra | Sarkari yojanaon ka saathi</title>
+<meta name="description" content="Government scheme PDFs se Hinglish mein jawab, har jawab ke saath page ka saboot." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f3f5fb;
+    --sheet: #ffffff;
+    --ink: #1c2033;
+    --muted: #5d6480;
+    --indigo: #263a8c;
+    --indigo-2: #3b52b8;
+    --indigo-soft: #e7ebf8;
+    --rule: #d6dcef;
+    --marker: #ffe45c;
+    --wheat: #d99a1e;
+    --leaf: #2d7a4c;
+    --leaf-soft: #e1f1e7;
+    --brick: #c4552d;
+    --alert: #a8331f;
+    --serif: "Tiro Devanagari Hindi", Georgia, serif;
+    --sans: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55;
+    display: grid; grid-template-columns: 310px 1fr; height: 100vh; overflow: hidden;
+    background:
+      radial-gradient(circle at 1px 1px, #dfe4f3 1px, transparent 0) 0 0 / 22px 22px,
+      var(--paper);
+  }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--indigo-2); outline-offset: 2px; border-radius: 6px; }
+  svg { display: block; }
+
+  /* ================= Sidebar ================= */
+  aside {
+    background: var(--sheet); border-right: 1px solid var(--rule);
+    padding: 26px 22px; display: flex; flex-direction: column; gap: 26px; overflow-y: auto;
+  }
+  .brand { display: flex; gap: 12px; align-items: center; }
+  .logo { width: 52px; height: 52px; flex: none; }
+  .logo .seal { transform-origin: 38px 38px; animation: sealPulse 3.2s ease-in-out infinite; }
+  @keyframes sealPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  .brand h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1.05; color: var(--indigo); }
+  .brand small { display: block; font-family: var(--sans); font-weight: 600; font-size: .95rem; color: var(--ink); }
+  .tagline { margin: -10px 0 0; color: var(--muted); font-size: .92rem; }
+
+  aside h2 { margin: 0 0 10px; font-size: .95rem; font-weight: 600; }
+  .library { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .library li { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--paper); font-size: .92rem; line-height: 1.25; }
+  .library .pages { color: var(--muted); font-size: .82rem; }
+  .pdf-ic { width: 34px; height: 34px; }
+  .library li:hover .pdf-ic .fold { transform: translate(-1px, 1px); }
+  .pdf-ic .fold { transition: transform .2s; }
+
+  .scores { display: grid; gap: 10px; }
+  .score { display: grid; grid-template-columns: 38px auto 1fr; gap: 10px; align-items: center; }
+  .score .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--indigo-soft); color: var(--indigo); }
+  .score .ic svg { width: 22px; height: 22px; }
+  .score b { font-family: var(--serif); font-weight: 400; font-size: 1.55rem; color: var(--indigo); line-height: 1; }
+  .score span { color: var(--muted); font-size: .86rem; line-height: 1.25; }
+  .fine { font-size: .78rem; color: var(--muted); margin: 10px 0 0; }
+
+  .status { margin-top: auto; display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--muted); padding: 10px 12px; border-radius: 10px; background: var(--paper); }
+  .pulse { position: relative; width: 10px; height: 10px; border-radius: 50%; background: #b9bfd3; flex: none; }
+  .status.ok .pulse { background: var(--leaf); }
+  .status.ok .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--leaf); animation: ping 1.8s cubic-bezier(0, 0, .2, 1) infinite; }
+  .status.down .pulse { background: var(--alert); }
+  @keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+
+  /* ================= Main ================= */
+  .main { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; height: 100vh; }
+  .topbar { display: flex; justify-content: flex-end; align-items: center; padding: 14px 28px 0; gap: 10px; }
+  .topbar .mini { display: none; }
+  .ghost { display: inline-flex; gap: 6px; align-items: center; background: var(--sheet); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px 6px 10px; cursor: pointer; font-size: .9rem; color: var(--muted); }
+  .ghost svg { width: 18px; height: 18px; transition: transform .5s; }
+  .ghost:hover { border-color: var(--indigo); color: var(--indigo); }
+  .ghost:hover svg { transform: rotate(-200deg); }
+
+  #chat { overflow-y: auto; padding: 8px 28px 28px; }
+  .thread { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+
+  /* ---------- Welcome ---------- */
+  .welcome { padding: 3vh 0 0; }
+  .hello { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .98rem; }
+  .namaste { width: 44px; height: 44px; }
+  .namaste { animation: bob 2.6s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .welcome .big { font-family: var(--serif); font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.12; margin: 14px 0 0; max-width: 17ch; }
+  .welcome .sub { color: var(--muted); max-width: 54ch; margin: 12px 0 28px; }
+
+  .schemes { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .scheme { background: var(--sheet); border: 1px solid var(--rule); border-radius: 16px; padding: 18px 18px 8px; position: relative; overflow: hidden; }
+  .scheme header { display: flex; gap: 14px; align-items: center; margin-bottom: 6px; }
+  .scene { width: 72px; height: 72px; flex: none; border-radius: 14px; }
+  .scheme h3 { margin: 0; font-size: 1.1rem; line-height: 1.2; }
+  .scheme p { margin: 2px 0 0; font-size: .86rem; color: var(--muted); line-height: 1.3; }
+  .suggest { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px dashed var(--rule); padding: 11px 2px; cursor: pointer; font-size: .96rem; }
+  .suggest svg { width: 18px; height: 18px; color: var(--muted); flex: none; transition: transform .2s, color .2s; }
+  .suggest:hover { color: var(--indigo); }
+  .suggest:hover svg { transform: translateX(4px); color: var(--indigo); }
+
+  /* scene: kisaan */
+  .scene.kisan { background: linear-gradient(#fdf3d8, #fbe7b4); }
+  .sun { transform-origin: 54px 20px; animation: spin 14s linear infinite; }
+  .stalk { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 3s ease-in-out infinite; }
+  .stalk.s2 { animation-delay: -.8s; animation-duration: 3.4s; }
+  .stalk.s3 { animation-delay: -1.6s; }
+  @keyframes sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .coin { animation: coinDrop 3.6s ease-in infinite; }
+  @keyframes coinDrop { 0% { transform: translateY(-14px); opacity: 0; } 15% { opacity: 1; } 55%, 100% { transform: translateY(0); opacity: 1; } 90% { opacity: 1; } }
+
+  /* scene: ghar */
+  .scene.ghar { background: linear-gradient(#e4e9fb, #cfd8f6); }
+  .window { animation: lamp 4s steps(1) infinite; }
+  @keyframes lamp { 0% { fill: #3a4785; } 30% { fill: #ffd85a; } 85% { fill: #ffd85a; } }
+  .smoke { animation: smoke 3s ease-out infinite; opacity: 0; }
+  .smoke.k2 { animation-delay: 1s; } .smoke.k3 { animation-delay: 2s; }
+  @keyframes smoke { 0% { transform: translate(0, 0) scale(.6); opacity: .7; } 100% { transform: translate(6px, -16px) scale(1.4); opacity: 0; } }
+
+  /* ---------- Messages ---------- */
+  .q { align-self: flex-end; max-width: 80%; background: var(--indigo); color: #fff; padding: 10px 16px; border-radius: 18px 18px 4px 18px; white-space: pre-wrap; animation: popIn .25s ease-out; }
+  @keyframes popIn { from { transform: translateY(8px) scale(.97); opacity: 0; } }
+
+  .a { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; }
+  .avatar { width: 40px; height: 40px; border-radius: 12px; background: var(--sheet); border: 1px solid var(--rule); display: grid; place-items: center; }
+  .avatar svg { width: 28px; height: 28px; }
+  .sheet {
+    position: relative; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px 16px 16px 16px;
+    padding: 18px 20px 14px 34px; min-width: 0;
+    background-image: linear-gradient(to right, transparent 20px, #eba79d 20px, #eba79d 21px, transparent 21px);
+    box-shadow: 0 1px 0 var(--rule), 0 10px 24px -18px rgba(38, 58, 140, .35);
+  }
+  .answer { margin: 0; font-size: 1.08rem; white-space: pre-wrap; min-height: 1.5em; }
+  .answer .w { animation: wordIn .3s ease-out both; }
+  @keyframes wordIn { from { opacity: 0; filter: blur(3px); } }
+
+  .proof { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--rule); display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .proof[hidden] { display: none; }
+  .quote { flex: 1 1 300px; margin: 0; font-family: var(--serif); font-size: 1rem; line-height: 1.8; color: #2c3150; }
+  .quote-label { display: flex; gap: 6px; align-items: center; font-family: var(--sans); font-size: .82rem; color: var(--muted); margin-bottom: 4px; }
+  .quote-label svg { width: 16px; height: 16px; }
+  .quote mark {
+    color: inherit; padding: 1px 3px; border-radius: 3px;
+    background: linear-gradient(104deg, transparent .5%, var(--marker) 2%, var(--marker) 97%, transparent 99%) no-repeat 0 0 / 0% 100%;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .quote.on mark { animation: highlight 1s ease-out forwards; }
+  @keyframes highlight { to { background-size: 100% 100%; } }
+
+  .stamp {
+    flex: 0 0 auto; color: var(--indigo); border: 3px double var(--indigo); border-radius: 8px;
+    padding: 6px 12px; text-align: center; line-height: 1.2; background: rgba(231, 235, 248, .6);
+    max-width: 210px; transform: rotate(-4deg); opacity: 0;
+  }
+  .stamp.on { animation: thunk .5s cubic-bezier(.2, 1.5, .4, 1) forwards; }
+  .stamp .doc { display: block; font-size: .76rem; font-weight: 600; }
+  .stamp .pg { display: block; font-family: var(--serif); font-size: 1.4rem; }
+  @keyframes thunk { from { transform: rotate(-14deg) scale(1.7); opacity: 0; } to { transform: rotate(-4deg) scale(1); opacity: 1; } }
+
+  .tools { display: flex; gap: 6px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+  .tool { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid transparent; border-radius: 999px; padding: 4px 10px; cursor: pointer; font-size: .85rem; color: var(--muted); }
+  .tool:hover { border-color: var(--rule); color: var(--indigo); }
+  .tool svg { width: 16px; height: 16px; }
+  .tool .check { display: none; color: var(--leaf); }
+  .tool.done .copy { display: none; } .tool.done .check { display: block; animation: popIn .25s; } .tool.done { color: var(--leaf); }
+  .tool .chev { transition: transform .25s; }
+  .tool[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .inside { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .inside.open { grid-template-rows: 1fr; }
+  .inside > div { overflow: hidden; }
+  .inside ul { list-style: none; margin: 10px 0 0; padding: 12px 14px; background: var(--paper); border-radius: 10px; font-size: .88rem; color: var(--muted); display: grid; gap: 6px; }
+  .inside li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+  .inside li svg { width: 16px; height: 16px; margin-top: 3px; color: var(--indigo); }
+
+  /* refusal */
+  .refusal .sheet { background-image: none; padding-left: 20px; border-style: dashed; }
+  .refusal .row { display: flex; gap: 14px; align-items: center; }
+  .refusal .seek { width: 46px; height: 46px; flex: none; color: var(--muted); }
+  .seek .glass { animation: seek 2.4s ease-in-out infinite; }
+  @keyframes seek { 0%, 100% { transform: translate(-4px, 0); } 50% { transform: translate(6px, 2px); } }
+  .refusal .answer { color: var(--ink); }
+  .refusal .hint { margin: 2px 0 0; font-size: .9rem; color: var(--muted); }
+
+  .error .sheet { border-color: var(--alert); background-image: none; padding-left: 20px; color: var(--alert); }
+
+  /* loading */
+  .loading .sheet { background-image: none; padding-left: 20px; display: flex; gap: 16px; align-items: center; }
+  .scan { width: 54px; height: 64px; flex: none; }
+  .scan .bar { animation: scan 1.4s ease-in-out infinite alternate; }
+  @keyframes scan { from { transform: translateY(0); } to { transform: translateY(40px); } }
+  .scan .ln { animation: lnBlink 1.4s ease-in-out infinite; }
+  @keyframes lnBlink { 50% { opacity: .35; } }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .92rem; }
+  .steps li { display: flex; gap: 8px; align-items: center; color: #a3aac2; transition: color .3s; }
+  .steps li i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; flex: none; display: grid; place-items: center; }
+  .steps li.now { color: var(--indigo); font-weight: 500; }
+  .steps li.now i { border-right-color: transparent; animation: spin .8s linear infinite; }
+  .steps li.done { color: var(--leaf); }
+  .steps li.done i { background: var(--leaf); border-color: var(--leaf); }
+  .steps li.done i::after { content: ""; width: 6px; height: 3px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+
+  /* ---------- Composer ---------- */
+  form { padding: 12px 28px 16px; background: linear-gradient(to top, var(--paper) 75%, transparent); }
+  .composer { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; align-items: center; background: var(--sheet); border: 1.5px solid var(--rule); border-radius: 16px; padding: 6px 6px 6px 14px; box-shadow: 0 12px 30px -22px rgba(38, 58, 140, .5); }
+  .composer:focus-within { border-color: var(--indigo); }
+  .composer .pen { width: 22px; height: 22px; color: var(--muted); flex: none; }
+  .composer:focus-within .pen { color: var(--indigo); animation: write .9s ease-in-out infinite; }
+  @keyframes write { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(2px, -1px) rotate(-8deg); } }
+  .composer input { flex: 1; border: 0; outline: 0; background: transparent; font-size: 1.02rem; min-width: 0; padding: 8px 0; }
+  .send { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 12px; background: var(--indigo); color: #fff; padding: 10px 16px; cursor: pointer; font-weight: 600; overflow: hidden; }
+  .send:hover { background: var(--indigo-2); }
+  .send svg { width: 18px; height: 18px; }
+  .send.fly svg { animation: fly .6s ease-in forwards; }
+  @keyframes fly { 40% { transform: translate(-3px, 3px); } 100% { transform: translate(30px, -30px); opacity: 0; } }
+  .send:disabled { opacity: .5; cursor: not-allowed; }
+  .disclaimer { max-width: 760px; margin: 8px auto 0; font-size: .78rem; color: var(--muted); text-align: center; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 900px) {
+    body { grid-template-columns: 1fr; }
+    aside { display: none; }
+    .topbar { justify-content: space-between; padding: 12px 16px 0; }
+    .topbar .mini { display: flex; gap: 8px; align-items: center; font-family: var(--serif); font-size: 1.3rem; color: var(--indigo); }
+    .topbar .mini svg { width: 32px; height: 32px; }
+    #chat { padding: 8px 16px 20px; }
+    form { padding: 10px 14px 14px; }
+    .schemes { grid-template-columns: 1fr; }
+    .a { grid-template-columns: 1fr; }
+    .avatar { display: none; }
+    .q { max-width: 92%; }
+    .send span { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= SVG icon library (ek baar likho, kahin bhi use karo) ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7 2.5 2.5 7L21 3Z M10 13l4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4Z M14 6l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-page" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M14 4l6 6-9 9H5v-6z M12 6l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z M9 8h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 52 52">
+    <rect x="9" y="5" width="28" height="36" rx="3" fill="#fff" stroke="#263a8c" stroke-width="2.5"/>
+    <path d="M15 14h16M15 20h16M15 26h10" stroke="#263a8c" stroke-width="2.5" stroke-linecap="round"/>
+    <g class="seal"><circle cx="38" cy="38" r="10" fill="#ffe45c" stroke="#263a8c" stroke-width="2.5"/><path d="M33.5 38.2l3 3 6-6" fill="none" stroke="#263a8c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </symbol>
+  <symbol id="i-pdf" viewBox="0 0 34 34">
+    <rect x="0" y="0" width="34" height="34" rx="8" fill="#fff"/>
+    <path d="M10 6h10l5 5v17H10z" fill="#fff" stroke="#263a8c" stroke-width="1.8" stroke-linejoin="round"/>
+    <path class="fold" d="M20 6v5h5" fill="#e7ebf8" stroke="#263a8c" stroke-width="1.8" stroke-linejoin="round"/>
+    <rect x="7" y="17" width="14" height="7" rx="2" fill="#c4552d"/>
+    <text x="14" y="22.6" font-size="5.6" font-family="Mukta, sans-serif" font-weight="700" fill="#fff" text-anchor="middle">PDF</text>
+  </symbol>
+</svg>
+
+<aside>
+  <div class="brand">
+    <svg class="logo"><use href="#i-logo"/></svg>
+    <h1>योजना मित्र<small>Yojana Mitra</small></h1>
+  </div>
+  <p class="tagline">Sarkari yojana ki PDFs padh kar Hinglish mein jawab deta hai, har jawab ke saath page ka saboot.</p>
+
+  <section>
+    <h2>Kin documents se jawab milta hai</h2>
+    <ul class="library">
+      <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PM-KISAN Guidelines</span><span class="pages">12 pg</span></li>
+      <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PM-KISAN FAQ (scanned, OCR)</span><span class="pages">9 pg</span></li>
+      <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PMAY-Urban 2.0 Guidelines</span><span class="pages">112 pg</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kitna bharosemand hai</h2>
+    <div class="scores">
+      <div class="score"><span class="ic"><svg><use href="#i-target"/></svg></span><b data-count="80" data-suffix="%">0%</b><span>sahi jawab (20 test sawaal)</span></div>
+      <div class="score"><span class="ic"><svg><use href="#i-shield"/></svg></span><b data-count="4" data-suffix="/4">0/4</b><span>bahar ke sawaalon pe saaf mana</span></div>
+      <div class="score"><span class="ic"><svg><use href="#i-bookmark"/></svg></span><b data-count="95" data-suffix="%">0%</b><span>jawab mein sahi page ka source</span></div>
+    </div>
+    <p class="fine">Apne banaye evaluation set par mapa gaya.</p>
+  </section>
+
+  <div class="status" id="status"><span class="pulse"></span><span id="statusText">Server check ho raha hai</span></div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <span class="mini"><svg><use href="#i-logo"/></svg>योजना मित्र</span>
+    <button class="ghost" id="resetBtn" type="button"><svg><use href="#i-refresh"/></svg>Nayi baatcheet</button>
+  </div>
+
+  <main id="chat" aria-live="polite">
+    <div class="thread" id="thread">
+      <div class="welcome" id="welcome">
+        <div class="hello">
+          <svg class="namaste"><use href="#i-logo"/></svg>
+          Namaste 🙏 Main aapka yojana mitra hoon.
+        </div>
+        <p class="big">Yojana ke baare mein apni bhasha mein poocho.</p>
+        <p class="sub">Jawab sirf official government documents se aata hai. Jo documents mein nahi likha, uska jawab main nahi banata.</p>
+
+        <div class="schemes">
+          <section class="scheme">
+            <header>
+              <svg class="scene kisan" viewBox="0 0 72 72" aria-hidden="true">
+                <g class="sun"><circle cx="54" cy="20" r="7" fill="#f5b82e"/><g stroke="#f5b82e" stroke-width="2" stroke-linecap="round"><path d="M54 8v-3M54 35v-3M42 20h-3M69 20h-3M45.5 11.5l-2-2M64.5 30.5l-2-2M45.5 28.5l-2 2M64.5 9.5l-2 2"/></g></g>
+                <path d="M0 58c14-6 30-6 72 0v14H0z" fill="#8cbf5f"/>
+                <g fill="#d99a1e" stroke="#a8711a" stroke-width=".8">
+                  <g class="stalk s1"><path d="M20 62V34" stroke="#7a9b3a" stroke-width="2"/><ellipse cx="17.5" cy="38" rx="2.2" ry="3.6" transform="rotate(-25 17.5 38)"/><ellipse cx="22.5" cy="38" rx="2.2" ry="3.6" transform="rotate(25 22.5 38)"/><ellipse cx="17.5" cy="45" rx="2.2" ry="3.6" transform="rotate(-25 17.5 45)"/><ellipse cx="22.5" cy="45" rx="2.2" ry="3.6" transform="rotate(25 22.5 45)"/><ellipse cx="20" cy="32" rx="2" ry="3.4"/></g>
+                  <g class="stalk s2"><path d="M33 64V30" stroke="#7a9b3a" stroke-width="2"/><ellipse cx="30.5" cy="34" rx="2.2" ry="3.6" transform="rotate(-25 30.5 34)"/><ellipse cx="35.5" cy="34" rx="2.2" ry="3.6" transform="rotate(25 35.5 34)"/><ellipse cx="30.5" cy="41" rx="2.2" ry="3.6" transform="rotate(-25 30.5 41)"/><ellipse cx="35.5" cy="41" rx="2.2" ry="3.6" transform="rotate(25 35.5 41)"/><ellipse cx="33" cy="28" rx="2" ry="3.4"/></g>
+                  <g class="stalk s3"><path d="M46 63V38" stroke="#7a9b3a" stroke-width="2"/><ellipse cx="43.5" cy="42" rx="2.2" ry="3.6" transform="rotate(-25 43.5 42)"/><ellipse cx="48.5" cy="42" rx="2.2" ry="3.6" transform="rotate(25 48.5 42)"/><ellipse cx="46" cy="36" rx="2" ry="3.4"/></g>
+                </g>
+                <g class="coin"><circle cx="60" cy="52" r="6" fill="#ffd34d" stroke="#a8711a" stroke-width="1.4"/><text x="60" y="55" font-size="8" font-weight="700" text-anchor="middle" fill="#7a4f0e" font-family="Mukta, sans-serif">₹</text></g>
+              </svg>
+              <div><h3>PM-KISAN</h3><p>Kisaan parivaron ko saal mein ₹6,000 ki madad</p></div>
+            </header>
+            <button class="suggest" type="button"><span>kisaan ko saal mein kitna paisa milta hai?</span><svg><use href="#i-arrow"/></svg></button>
+            <button class="suggest" type="button"><span>PM-KISAN ke liye kaun eligible nahi hai?</span><svg><use href="#i-arrow"/></svg></button>
+            <button class="suggest" type="button"><span>paisa kitni kishton mein aata hai?</span><svg><use href="#i-arrow"/></svg></button>
+          </section>
+
+          <section class="scheme">
+            <header>
+              <svg class="scene ghar" viewBox="0 0 72 72" aria-hidden="true">
+                <circle class="smoke k1" cx="49" cy="20" r="3" fill="#fff"/>
+                <circle class="smoke k2" cx="49" cy="20" r="3" fill="#fff"/>
+                <circle class="smoke k3" cx="49" cy="20" r="3" fill="#fff"/>
+                <rect x="45" y="20" width="7" height="12" fill="#8c3c22"/>
+                <path d="M0 60h72v12H0z" fill="#9fb0e8"/>
+                <path d="M14 36l22-17 22 17" fill="#c4552d" stroke="#8c3c22" stroke-width="1.6" stroke-linejoin="round"/>
+                <rect x="18" y="35" width="36" height="25" fill="#fff6e8" stroke="#8c3c22" stroke-width="1.6"/>
+                <rect x="23" y="41" width="10" height="9" rx="1" class="window" fill="#3a4785" stroke="#8c3c22" stroke-width="1.4"/>
+                <path d="M28 41v9M23 45.5h10" stroke="#8c3c22" stroke-width="1"/>
+                <rect x="39" y="44" width="9" height="16" rx="1" fill="#263a8c"/>
+                <circle cx="46" cy="52.5" r=".9" fill="#ffe45c"/>
+              </svg>
+              <div><h3>PMAY-Urban 2.0</h3><p>Shehar mein pakka ghar banane ya khareedne ke liye madad</p></div>
+            </header>
+            <button class="suggest" type="button"><span>shehar mein ghar ke liye EWS income limit kya hai?</span><svg><use href="#i-arrow"/></svg></button>
+            <button class="suggest" type="button"><span>PMAY-U 2.0 mein ghar kiske naam pe hona chahiye?</span><svg><use href="#i-arrow"/></svg></button>
+            <button class="suggest" type="button"><span>kya pehle se pakka ghar ho toh apply kar sakte hain?</span><svg><use href="#i-arrow"/></svg></button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <form id="askForm">
+    <div class="composer">
+      <svg class="pen"><use href="#i-pen"/></svg>
+      <input id="question" placeholder="Apna sawaal likho, jaise: PM-KISAN ke liye registration kaise karein?" autocomplete="off" maxlength="500" aria-label="Sawaal" />
+      <button type="submit" class="send" id="sendBtn"><span>Poocho</span><svg><use href="#i-plane"/></svg></button>
+    </div>
+    <p class="disclaimer">Yeh ek AI sahayak hai. Koi bhi form bharne se pehle official website par jaankari zaroor milayein.</p>
+  </form>
+</div>
+
+<script>
+// ============================================================
+// 🔌 BACKEND SE JUDNE WALA HISSA (yahi seekhna hai!)
+// ============================================================
+
+// 1️⃣ API ka address. Live hone par sirf yeh ek line badlegi.
+const API_URL = "http://127.0.0.1:8001";
+
+// 2️⃣ History FRONTEND yaad rakhta hai (API stateless hai)
+let history = [];
+
+// 3️⃣ Asli call: question + history bhejo, JSON jawab lo
+async function askBackend(question) {
+  const res = await fetch(`${API_URL}/ask`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question, history }),      // 📜 API contract (AskRequest)
+  });
+
+  if (!res.ok) {                                       // 4️⃣ status code check
+    if (res.status === 422) throw new Error("Sawaal 2 se 500 characters ke beech hona chahiye.");
+    if (res.status === 429) throw new Error("Abhi bahut sawaal aa rahe hain. Ek minute baad dobara poochiye.");
+    throw new Error(`Server ne error diya (${res.status}). Thodi der baad dobara poochiye.`);
+  }
+  return res.json();                                   // 📜 AskResponse
+}
+
+// 5️⃣ Health check: page khulte hi dekho backend zinda hai ya nahi
+async function checkHealth() {
+  const box = document.getElementById("status");
+  const text = document.getElementById("statusText");
+  try {
+    const res = await fetch(`${API_URL}/health`);
+    if (!res.ok) throw new Error();
+    box.className = "status ok"; text.textContent = "Server live hai";
+  } catch {
+    box.className = "status down"; text.textContent = "Server se connect nahi ho paya";
+  }
+}
+
+// ============================================================
+// 🎨 UI wala hissa (isko seekhne ki zaroorat nahi)
+// ============================================================
+const DOC_NAMES = {
+  "pm_kisan_guidelines.pdf": "PM-KISAN Guidelines",
+  "pm_kisan_faq.pdf": "PM-KISAN FAQ",
+  "pmay_urban_2_guidelines.pdf": "PMAY-Urban 2.0 Guidelines",
+};
+const docName = (f) => DOC_NAMES[f.trim()] || f.trim();
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const wait = (ms) => new Promise((r) => setTimeout(r, reduceMotion ? 0 : ms));
+
+const thread = document.getElementById("thread");
+const chat = document.getElementById("chat");
+const form = document.getElementById("askForm");
+const input = document.getElementById("question");
+const sendBtn = document.getElementById("sendBtn");
+
+// Element banao (textContent = XSS se safe 🛡️)
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function icon(id, cls) {
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  if (cls) s.setAttribute("class", cls);
+  const u = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  u.setAttribute("href", `#${id}`);
+  s.appendChild(u);
+  return s;
+}
+const scrollDown = () => chat.scrollTo({ top: chat.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
+
+const CITE_RE = /\(Source:\s*([^,)]+),\s*pages?\s*([^)]+)\)/gi;
+function parseEvidence(evidence) {
+  const out = [], re = /"([^"]+)"\s*\(Source:\s*([^,)]+),\s*pages?\s*([^)]+)\)/gi;
+  let m;
+  while ((m = re.exec(evidence || ""))) out.push({ quote: m[1], doc: m[2], page: m[3] });
+  return out;
+}
+
+function avatar() {
+  const a = el("div", "avatar");
+  a.appendChild(icon("i-logo"));
+  return a;
+}
+
+// ---------- Loading: 3 steps (asli pipeline: rewrite → retrieve → answer) ----------
+function loadingBlock() {
+  const wrap = el("div", "a loading");
+  wrap.appendChild(avatar());
+  const sheet = el("div", "sheet");
+  sheet.innerHTML = `
+    <svg class="scan" viewBox="0 0 54 64" aria-hidden="true">
+      <path d="M6 3h30l12 12v46H6z" fill="#fff" stroke="#263a8c" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M36 3v12h12" fill="#e7ebf8" stroke="#263a8c" stroke-width="2.4" stroke-linejoin="round"/>
+      <g stroke="#9aa6d6" stroke-width="3" stroke-linecap="round">
+        <path class="ln" d="M13 24h28"/><path class="ln" d="M13 32h28" style="animation-delay:.2s"/>
+        <path class="ln" d="M13 40h20" style="animation-delay:.4s"/><path class="ln" d="M13 48h24" style="animation-delay:.6s"/>
+      </g>
+      <g class="bar"><rect x="2" y="14" width="50" height="4" rx="2" fill="#ffe45c" opacity=".9"/></g>
+    </svg>`;
+  const steps = el("ul", "steps");
+  ["Sawaal samajh raha hoon", "PDFs mein dhoondh raha hoon", "Jawab likh raha hoon"].forEach((t, i) => {
+    const li = el("li", i === 0 ? "now" : "");
+    li.appendChild(el("i"));
+    li.appendChild(el("span", null, t));
+    steps.appendChild(li);
+  });
+  sheet.appendChild(steps);
+  wrap.appendChild(sheet);
+
+  const items = [...steps.children];
+  let k = 0;
+  const timer = setInterval(() => {
+    if (k >= items.length - 1) return clearInterval(timer);
+    items[k].className = "done"; k++; items[k].className = "now";
+  }, 1400);
+  wrap.stop = () => clearInterval(timer);
+  return wrap;
+}
+
+// ---------- Answer ----------
+async function renderAnswer(holder, data) {
+  const isRefusal = /nahi mili/i.test(data.answer);
+  const wrap = el("div", `a${isRefusal ? " refusal" : ""}`);
+  wrap.appendChild(avatar());
+  const sheet = el("div", "sheet");
+  wrap.appendChild(sheet);
+  holder.replaceWith(wrap);
+
+  const cites = [...data.answer.matchAll(CITE_RE)].map((m) => ({ doc: m[1], page: m[2] }));
+  const clean = data.answer.replace(CITE_RE, "").replace(/\s+\./g, ".").trim();
+
+  const answerP = el("p", "answer");
+  if (isRefusal) {
+    const row = el("div", "row");
+    row.innerHTML = `
+      <svg class="seek" viewBox="0 0 46 46" aria-hidden="true">
+        <path d="M8 6h20l8 8v26H8z" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M14 18h14M14 24h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+        <g class="glass"><circle cx="26" cy="28" r="7" fill="#f3f5fb" stroke="#263a8c" stroke-width="2.4"/><path d="M31 33l6 6" stroke="#263a8c" stroke-width="2.6" stroke-linecap="round"/></g>
+      </svg>`;
+    const txt = el("div");
+    answerP.textContent = clean;
+    txt.appendChild(answerP);
+    txt.appendChild(el("p", "hint", "Sawaal thoda alag tarike se poochiye, ya yojana ka naam saath mein likhiye."));
+    row.appendChild(txt);
+    sheet.appendChild(row);
+  } else {
+    sheet.appendChild(answerP);
+    // Shabd-shabd likhna ✍️
+    const words = clean.split(/(\s+)/);
+    for (const w of words) {
+      if (!w.trim()) { answerP.appendChild(document.createTextNode(w)); continue; }
+      answerP.appendChild(el("span", "w", w));
+      await wait(28);
+    }
+  }
+
+  // Saboot: highlighter + stamp
+  const ev = parseEvidence(data.evidence);
+  const first = ev[0] || cites[0];
+  if (!isRefusal && (ev.length || first)) {
+    const proof = el("div", "proof");
+    let quote, stamp;
+    if (ev.length) {
+      quote = el("blockquote", "quote");
+      const lab = el("span", "quote-label");
+      lab.appendChild(icon("i-quote"));
+      lab.appendChild(document.createTextNode("Document mein likha hai"));
+      quote.appendChild(lab);
+      ev.forEach((e, i) => {
+        if (i) quote.appendChild(document.createTextNode(" "));
+        quote.appendChild(el("mark", null, e.quote));
+      });
+      proof.appendChild(quote);
+    }
+    if (first) {
+      stamp = el("div", "stamp");
+      stamp.appendChild(el("span", "doc", docName(first.doc)));
+      stamp.appendChild(el("span", "pg", `page ${first.page.trim()}`));
+      proof.appendChild(stamp);
+    }
+    sheet.appendChild(proof);
+    scrollDown();
+    await wait(150);
+    quote?.classList.add("on");
+    await wait(quote ? 900 : 0);
+    stamp?.classList.add("on");
+  }
+
+  // Tools: copy + "maine kya dhoondha"
+  const tools = el("div", "tools");
+  const copyBtn = el("button", "tool");
+  copyBtn.type = "button";
+  copyBtn.appendChild(icon("i-copy", "copy"));
+  copyBtn.appendChild(icon("i-check", "check"));
+  const copyLabel = el("span", null, "Copy");
+  copyBtn.appendChild(copyLabel);
+  copyBtn.addEventListener("click", async () => {
+    const src = first ? ` (Source: ${docName(first.doc)}, page ${first.page.trim()})` : "";
+    try {
+      await navigator.clipboard.writeText(clean + src);
+      copyBtn.classList.add("done"); copyLabel.textContent = "Copied";
+      setTimeout(() => { copyBtn.classList.remove("done"); copyLabel.textContent = "Copy"; }, 1800);
+    } catch { copyLabel.textContent = "Copy nahi hua"; }
+  });
+
+  const moreBtn = el("button", "tool");
+  moreBtn.type = "button";
+  moreBtn.setAttribute("aria-expanded", "false");
+  moreBtn.appendChild(icon("i-search"));
+  moreBtn.appendChild(el("span", null, "Maine kya dhoondha"));
+  moreBtn.appendChild(icon("i-chev", "chev"));
+
+  const inside = el("div", "inside");
+  const innerDiv = el("div");
+  const ul = el("ul");
+  const li1 = el("li");
+  li1.appendChild(icon("i-search"));
+  li1.appendChild(el("span", null, `Sawaal ko aise samjha: "${data.search_question}"`));
+  ul.appendChild(li1);
+  data.sources.forEach((s) => {
+    const li = el("li");
+    li.appendChild(icon("i-page"));
+    li.appendChild(el("span", null, `${docName(s.pdf)}: pages ${s.pages.join(", ")} padhe`));
+    ul.appendChild(li);
+  });
+  innerDiv.appendChild(ul);
+  inside.appendChild(innerDiv);
+  moreBtn.addEventListener("click", () => {
+    const open = inside.classList.toggle("open");
+    moreBtn.setAttribute("aria-expanded", String(open));
+    if (open) setTimeout(scrollDown, 300);
+  });
+
+  if (!isRefusal) tools.appendChild(copyBtn);
+  tools.appendChild(moreBtn);
+  sheet.appendChild(tools);
+  sheet.appendChild(inside);
+  scrollDown();
+}
+
+function errorBlock(message) {
+  const wrap = el("div", "a error");
+  wrap.appendChild(avatar());
+  wrap.appendChild(el("div", "sheet", message));
+  return wrap;
+}
+
+async function send(question) {
+  question = question.trim();
+  if (question.length < 2 || sendBtn.disabled) return;
+
+  document.getElementById("welcome")?.remove();
+  thread.appendChild(el("div", "q", question));
+  input.value = "";
+  input.disabled = sendBtn.disabled = true;              // ⏳ loading state: double request na jaaye
+  sendBtn.classList.remove("fly"); void sendBtn.offsetWidth; sendBtn.classList.add("fly");
+  const loader = loadingBlock();
+  thread.appendChild(loader);
+  scrollDown();
+
+  try {
+    const data = await askBackend(question);
+    loader.stop();
+    await renderAnswer(loader, data);
+    history.push({ role: "user", content: question });
+    history.push({ role: "assistant", content: data.answer });
+    history = history.slice(-8);                          // bahut lambi history mat bhejo
+  } catch (err) {
+    loader.stop();
+    const msg = err.message.includes("fetch")
+      ? "Server se connect nahi ho paya. Backend chal raha hai ya nahi, check karein (CORS bhi ho sakta hai)."
+      : err.message;
+    loader.replaceWith(errorBlock(msg));
+  } finally {
+    input.disabled = sendBtn.disabled = false;
+    sendBtn.classList.remove("fly");
+    input.focus();
+    scrollDown();
+  }
+}
+
+// Sidebar numbers ginti karte hue 🔢
+function countUp() {
+  document.querySelectorAll("[data-count]").forEach((b) => {
+    const end = +b.dataset.count, suf = b.dataset.suffix, t0 = performance.now(), dur = reduceMotion ? 1 : 1200;
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur), v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      b.textContent = v + suf;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+form.addEventListener("submit", (e) => { e.preventDefault(); send(input.value); });
+document.querySelectorAll(".suggest").forEach((b) => b.addEventListener("click", () => send(b.textContent)));
+document.getElementById("resetBtn").addEventListener("click", () => location.reload());
+
+checkHealth();
+countUp();
+input.focus();
+</script>
+</body>
+</html>
