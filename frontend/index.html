@@ -383,8 +383,9 @@
 // 🔌 BACKEND SE JUDNE WALA HISSA (yahi seekhna hai!)
 // ============================================================
 
-// 1️⃣ API ka address. Live hone par sirf yeh ek line badlegi.
-const API_URL = "http://127.0.0.1:8001";
+// 1️⃣ API ka address: laptop pe local server, internet pe Render wala server 🌍
+const IS_LOCAL = ["localhost", "127.0.0.1"].includes(location.hostname);
+const API_URL = IS_LOCAL ? "http://127.0.0.1:8001" : "https://yojana-mitra-r89t.onrender.com";
 
 // 2️⃣ History FRONTEND yaad rakhta hai (API stateless hai)
 let history = [];
@@ -409,12 +410,17 @@ async function askBackend(question) {
 async function checkHealth() {
   const box = document.getElementById("status");
   const text = document.getElementById("statusText");
+  // Free server 15 min baad so jata hai 😴, jaagne mein ~1 minute lagta hai.
+  // 3 second mein jawab na aaye toh user ko bata do ki kya ho raha hai.
+  const slow = setTimeout(() => { text.textContent = "Server jaag raha hai, ~1 minute ⏳"; }, 3000);
   try {
     const res = await fetch(`${API_URL}/health`);
     if (!res.ok) throw new Error();
     box.className = "status ok"; text.textContent = "Server live hai";
   } catch {
     box.className = "status down"; text.textContent = "Server se connect nahi ho paya";
+  } finally {
+    clearTimeout(slow);
   }
 }
 
