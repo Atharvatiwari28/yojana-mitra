@@ -223,11 +223,31 @@
   .send.fly svg { animation: fly .6s ease-in forwards; }
   @keyframes fly { 40% { transform: translate(-3px, 3px); } 100% { transform: translate(30px, -30px); opacity: 0; } }
   .send:disabled { opacity: .5; cursor: not-allowed; }
+  .attach { flex: none; width: 40px; height: 40px; border: 0; border-radius: 10px; background: var(--indigo-soft); color: var(--indigo); cursor: pointer; display: grid; place-items: center; }
+  .attach:hover { background: var(--rule); }
+  .attach svg { width: 20px; height: 20px; }
+  .attach:disabled { opacity: .5; cursor: not-allowed; }
+  .mydocs { max-width: 760px; margin: 0 auto 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .86rem; color: var(--muted); }
+  .mydocs:empty { display: none; }
+  .doc-chip { display: inline-flex; gap: 6px; align-items: center; background: var(--leaf-soft); color: var(--leaf); border-radius: 999px; padding: 4px 12px; font-weight: 500; max-width: 100%; }
+  .doc-chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .doc-chip svg { width: 16px; height: 16px; flex: none; }
+  .unlink { border: 0; background: none; color: var(--muted); cursor: pointer; text-decoration: underline; font-size: .84rem; padding: 2px 4px; }
+  .unlink:hover { color: var(--alert); }
+  .q.file { display: inline-flex; gap: 8px; align-items: center; }
+  .q.file svg { width: 26px; height: 26px; flex: none; }
+  .ok .sheet { background-image: none; padding-left: 20px; border-color: var(--leaf); }
+  .ok .sheet b { color: var(--leaf); }
+  .ok .sheet p { margin: 4px 0 0; color: var(--muted); font-size: .92rem; }
+  .library li.mine { background: var(--leaf-soft); }
   .disclaimer { max-width: 760px; margin: 8px auto 0; font-size: .78rem; color: var(--muted); text-align: center; }
 
   /* ---------- Mobile ---------- */
   @media (max-width: 900px) {
-    body { grid-template-columns: 1fr; }
+    body { grid-template-columns: minmax(0, 1fr); }
+    .composer .pen { display: none; }
+    .composer { padding-left: 6px; }
+    .composer input { width: 0; }
     aside { display: none; }
     .topbar { justify-content: space-between; padding: 12px 16px 0; }
     .topbar .mini { display: flex; gap: 8px; align-items: center; font-family: var(--serif); font-size: 1.3rem; color: var(--indigo); }
@@ -255,6 +275,7 @@
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4Z M14 6l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11.5l-8.3 8.3a5 5 0 0 1-7.1-7.1l8.5-8.5a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
@@ -286,7 +307,7 @@
 
   <section>
     <h2>Kin documents se jawab milta hai</h2>
-    <ul class="library">
+    <ul class="library" id="library">
       <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PM-KISAN Guidelines</span><span class="pages">12 pg</span></li>
       <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PM-KISAN FAQ (scanned, OCR)</span><span class="pages">9 pg</span></li>
       <li><svg class="pdf-ic"><use href="#i-pdf"/></svg><span>PMAY-Urban 2.0 Guidelines</span><span class="pages">112 pg</span></li>
@@ -320,7 +341,8 @@
           Namaste 🙏 Main aapka yojana mitra hoon.
         </div>
         <p class="big">Yojana ke baare mein apni bhasha mein poocho.</p>
-        <p class="sub">Jawab sirf official government documents se aata hai. Jo documents mein nahi likha, uska jawab main nahi banata.</p>
+        <p class="sub">Jawab sirf official government documents se aata hai. Jo documents mein nahi likha, uska jawab main nahi banata.
+          Aapke paas kisi aur yojana ki sarkari PDF hai? 📎 se upload karke usi ke baare mein poochiye.</p>
 
         <div class="schemes">
           <section class="scheme">
@@ -369,12 +391,15 @@
   </main>
 
   <form id="askForm">
+    <div class="mydocs" id="myDocs"></div>
     <div class="composer">
+      <button type="button" class="attach" id="attachBtn" title="Sarkari PDF upload karein" aria-label="Sarkari PDF upload karein"><svg><use href="#i-clip"/></svg></button>
+      <input type="file" id="pdfInput" accept="application/pdf,.pdf" hidden />
       <svg class="pen"><use href="#i-pen"/></svg>
       <input id="question" placeholder="Apna sawaal likho, jaise: PM-KISAN ke liye registration kaise karein?" autocomplete="off" maxlength="500" aria-label="Sawaal" />
       <button type="submit" class="send" id="sendBtn"><span>Poocho</span><svg><use href="#i-plane"/></svg></button>
     </div>
-    <p class="disclaimer">Yeh ek AI sahayak hai. Koi bhi form bharne se pehle official website par jaankari zaroor milayein.</p>
+    <p class="disclaimer">Yeh ek AI sahayak hai. Koi bhi form bharne se pehle official website par jaankari zaroor milayein. 📎 Aap sirf sarkari PDF upload kar sakte hain; woh 24 ghante baad apne-aap delete ho jaati hai.</p>
   </form>
 </div>
 
@@ -390,12 +415,19 @@ const API_URL = IS_LOCAL ? "http://127.0.0.1:8001" : "https://yojana-mitra-r89t.
 // 2️⃣ History FRONTEND yaad rakhta hai (API stateless hai)
 let history = [];
 
+// 📤 Upload ki hui PDF sirf isi browser tab ki: ek random session id se pehchani jaati hai
+const SESSION_KEY = "ym_session";
+const sessionId = sessionStorage.getItem(SESSION_KEY) || crypto.randomUUID();
+sessionStorage.setItem(SESSION_KEY, sessionId);
+let myDocs = JSON.parse(sessionStorage.getItem("ym_docs") || "[]");   // [{doc_name, issuer, pages}]
+
 // 3️⃣ Asli call: question + history bhejo, JSON jawab lo
 async function askBackend(question) {
   const res = await fetch(`${API_URL}/ask`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question, history }),      // 📜 API contract (AskRequest)
+    // Upload ki hui PDF ho toh session_id bhi bhejo, taaki server usmein bhi dhoondhe
+    body: JSON.stringify(myDocs.length ? { question, history, session_id: sessionId } : { question, history }),
   });
 
   if (!res.ok) {                                       // 4️⃣ status code check
@@ -474,7 +506,7 @@ function avatar() {
 }
 
 // ---------- Loading: 3 steps (asli pipeline: rewrite → retrieve → answer) ----------
-function loadingBlock() {
+function loadingBlock(stepTexts = ["Sawaal samajh raha hoon", "PDFs mein dhoondh raha hoon", "Jawab likh raha hoon"]) {
   const wrap = el("div", "a loading");
   wrap.appendChild(avatar());
   const sheet = el("div", "sheet");
@@ -489,7 +521,7 @@ function loadingBlock() {
       <g class="bar"><rect x="2" y="14" width="50" height="4" rx="2" fill="#ffe45c" opacity=".9"/></g>
     </svg>`;
   const steps = el("ul", "steps");
-  ["Sawaal samajh raha hoon", "PDFs mein dhoondh raha hoon", "Jawab likh raha hoon"].forEach((t, i) => {
+  stepTexts.forEach((t, i) => {
     const li = el("li", i === 0 ? "now" : "");
     li.appendChild(el("i"));
     li.appendChild(el("span", null, t));
@@ -671,6 +703,102 @@ async function send(question) {
   }
 }
 
+// ---------- 📤 Sarkari PDF upload ----------
+const attachBtn = document.getElementById("attachBtn");
+const pdfInput = document.getElementById("pdfInput");
+const MAX_MB = 10;
+
+async function uploadBackend(file) {
+  const form = new FormData();
+  form.append("session_id", sessionId);
+  form.append("file", file);
+  const res = await fetch(`${API_URL}/upload`, { method: "POST", body: form });
+  if (!res.ok) {
+    let msg = `Upload nahi hua (${res.status}). Thodi der baad dobara try karein.`;
+    try { const j = await res.json(); if (typeof j.detail === "string") msg = j.detail; } catch {}
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
+function saveDocs() { sessionStorage.setItem("ym_docs", JSON.stringify(myDocs)); renderMyDocs(); }
+
+function renderMyDocs() {
+  const bar = document.getElementById("myDocs");
+  bar.replaceChildren();
+  document.querySelectorAll("#library li.mine").forEach((li) => li.remove());
+  if (!myDocs.length) return;
+  bar.appendChild(el("span", null, "Aapki PDF:"));
+  myDocs.forEach((d) => {
+    const chip = el("span", "doc-chip");
+    chip.appendChild(icon("i-page"));
+    chip.appendChild(el("span", null, d.doc_name));
+    chip.title = `${d.issuer} · ${d.pages} pages`;
+    bar.appendChild(chip);
+    const li = el("li", "mine");
+    li.appendChild(icon("i-pdf", "pdf-ic"));
+    li.appendChild(el("span", null, `${d.doc_name} (aapki upload)`));
+    li.appendChild(el("span", "pages", `${d.pages} pg`));
+    document.getElementById("library").appendChild(li);
+  });
+  const rm = el("button", "unlink", "Hatao");
+  rm.type = "button";
+  rm.addEventListener("click", removeMyDocs);
+  bar.appendChild(rm);
+}
+
+async function removeMyDocs() {
+  try { await fetch(`${API_URL}/upload?session_id=${encodeURIComponent(sessionId)}`, { method: "DELETE" }); } catch {}
+  myDocs = []; saveDocs();
+}
+
+async function sendPdf(file) {
+  if (!file) return;
+  if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") {
+    thread.appendChild(errorBlock("Sirf PDF file upload karein.")); scrollDown(); return;
+  }
+  if (file.size > MAX_MB * 1024 * 1024) {
+    thread.appendChild(errorBlock(`PDF ${MAX_MB} MB se badi hai. Chhoti PDF upload karein.`)); scrollDown(); return;
+  }
+  document.getElementById("welcome")?.remove();
+  const bubble = el("div", "q file");
+  bubble.appendChild(icon("i-pdf"));
+  bubble.appendChild(el("span", null, file.name));
+  thread.appendChild(bubble);
+  attachBtn.disabled = input.disabled = sendBtn.disabled = true;
+  const loader = loadingBlock(["PDF padh raha hoon", "Check kar raha hoon ki yeh sarkari document hai", "Jawab ke liye taiyaar kar raha hoon"]);
+  thread.appendChild(loader);
+  scrollDown();
+  try {
+    const info = await uploadBackend(file);
+    loader.stop();
+    myDocs = myDocs.filter((d) => d.doc_name !== info.doc_name).concat([info]);
+    saveDocs();
+    const wrap = el("div", "a ok");
+    wrap.appendChild(avatar());
+    const sheet = el("div", "sheet");
+    const head = el("div");
+    head.appendChild(el("b", null, "✅ Sarkari document mil gaya: "));
+    head.appendChild(document.createTextNode(`${info.issuer}${info.document_type ? " · " + info.document_type : ""} (${info.pages} ${info.pages === 1 ? "page" : "pages"})`));
+    sheet.appendChild(head);
+    sheet.appendChild(el("p", null, "Ab is PDF ke baare mein apna sawaal poochiye. Jawab page number ke saath milega."));
+    wrap.appendChild(sheet);
+    loader.replaceWith(wrap);
+  } catch (err) {
+    loader.stop();
+    const msg = err.message.includes("fetch") ? "Server se connect nahi ho paya. Thodi der baad try karein." : err.message;
+    loader.replaceWith(errorBlock(msg));
+  } finally {
+    attachBtn.disabled = input.disabled = sendBtn.disabled = false;
+    pdfInput.value = "";
+    input.focus();
+    scrollDown();
+  }
+}
+
+attachBtn.addEventListener("click", () => pdfInput.click());
+pdfInput.addEventListener("change", () => sendPdf(pdfInput.files[0]));
+
 // Sidebar numbers ginti karte hue 🔢
 function countUp() {
   document.querySelectorAll("[data-count]").forEach((b) => {
@@ -686,10 +814,15 @@ function countUp() {
 
 form.addEventListener("submit", (e) => { e.preventDefault(); send(input.value); });
 document.querySelectorAll(".suggest").forEach((b) => b.addEventListener("click", () => send(b.textContent)));
-document.getElementById("resetBtn").addEventListener("click", () => location.reload());
+document.getElementById("resetBtn").addEventListener("click", async () => {
+  if (myDocs.length) await removeMyDocs();                 // nayi baatcheet = upload ki hui PDF bhi hatao
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+});
 
 checkHealth();
 countUp();
+renderMyDocs();
 input.focus();
 </script>
 </body>

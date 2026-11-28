@@ -46,9 +46,8 @@ def split_sentences(text: str) -> list[str]:
     return sentences
 
 
-def main():
-    pages = json.loads(CLEAN_FILE.read_text())
-
+def make_chunks(pages: list[dict]) -> list[dict]:
+    """[{"source", "page", "text"}, ...] → chunks. Upload wali PDF (user_docs.py) bhi yahi use karti hai 🔁"""
     # Har PDF ke sentences, unke page number ke saath: [(sentence, page), ...]
     sentences_by_source = defaultdict(list)
     for p in pages:
@@ -81,13 +80,20 @@ def main():
 
         if current:
             save_chunk()
+    return chunks
+
+
+def main():
+    pages = json.loads(CLEAN_FILE.read_text())
+    chunks = make_chunks(pages)
+    sources = list(dict.fromkeys(c["source"] for c in chunks))
 
     OUTPUT_FILE.write_text(json.dumps(chunks, ensure_ascii=False, indent=2))
 
     # 📊 Report
     lengths = [len(c["text"]) for c in chunks]
     print("✂️  Chunking report\n")
-    for source in sentences_by_source:
+    for source in sources:
         n = sum(1 for c in chunks if c["source"] == source)
         print(f"   📄 {source}: {n} chunks")
     print(f"\n   🧩 Total chunks:   {len(chunks)}")

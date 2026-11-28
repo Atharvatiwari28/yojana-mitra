@@ -9,14 +9,17 @@ Docs: http://127.0.0.1:8001/docs
 """
 
 import os
+import re
+from contextlib import asynccontextmanager
 from typing import Literal
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 import rag
+import user_docs
 
 load_dotenv()
 
@@ -38,6 +41,15 @@ class ChatMessage(BaseModel):
 class AskRequest(BaseModel):
     question: str = Field(min_length=2, max_length=500)
     history: list[ChatMessage] = []
+    session_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9-]{8,64}$")  # upload ki hui PDF isi se milti hai
+
+
+class UploadResponse(BaseModel):
+    doc_name: str
+    issuer: str
+    document_type: str
+    pages: int
+    chunks: int
 
 
 class Source(BaseModel):
@@ -55,13 +67,23 @@ class AskResponse(BaseModel):
 # ---------------------------------------------------------------------------
 # 🚀 App
 # ---------------------------------------------------------------------------
-app = FastAPI(title="Yojana Mitra API 🇮🇳")
+@asynccontextmanager
+async def lifespan(app):
+    try:
+        user_docs.ensure_table()          # user_chunks table na ho toh bana do
+        user_docs.delete_expired()        # 24 ghante se purani uploads hatao
+    except Exception as e:                # database na mile toh bhi server chalu ho (built-in PDFs ke liye)
+        print(f"⚠️ user_chunks setup nahi hua: {e}")
+    yield
+
+
+app = FastAPI(title="Yojana Mitra API 🇮🇳", lifespan=lifespan)
 
 # 🚧 CORS: browser (security guard 👮) ko batao ki guest list mein kaun hai
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,   # ⚠️ production mein kabhi ["*"] mat karna
-    allow_methods=["GET", "POST"],   # sirf yahi do methods chahiye
+    allow_methods=["GET", "POST", "DELETE"],   # DELETE: user apni upload ki hui PDF hata sake
     allow_headers=["Content-Type"],  # JSON bhejne ke liye itna kaafi
 )
 
@@ -79,7 +101,7 @@ def health():
 @app.post("/ask", response_model=AskResponse)
 def ask(req: AskRequest):
     history = [m.model_dump() for m in req.history]
-    result = rag.answer(req.question, history)
+    result = rag.answer(req.question, history, session_id=req.session_id)
 
     # Same PDF ke pages ek jagah jodo (duplicate sources na dikhein)
     pages_by_pdf: dict[str, set[int]] = {}
@@ -93,3 +115,35 @@ def ask(req: AskRequest):
         search_question=result["search_question"],
         sources=sources,
     )
+
+
+# ---------------------------------------------------------------------------
+# 📤 User ki apni sarkari PDF (sirf usi ke liye, 24 ghante tak)
+# ---------------------------------------------------------------------------
+SESSION_RE = re.compile(r"^[A-Za-z0-9-]{8,64}$")
+
+
+def _check_session(session_id: str):
+    if not SESSION_RE.match(session_id or ""):
+        raise HTTPException(422, "session_id galat hai")
+
+
+@app.post("/upload", response_model=UploadResponse)
+def upload(session_id: str = Form(...), file: UploadFile = File(...)):
+    _check_session(session_id)
+    data = file.file.read(user_docs.MAX_MB * 1024 * 1024 + 1)
+    try:
+        info = user_docs.add_document(session_id, file.filename or "document.pdf", data)
+    except user_docs.NotAllowed as e:
+        raise HTTPException(400, str(e))
+    except Exception as e:                     # embeddings/database ki dikkat: user ko saaf batao
+        print(f"⚠️ Upload fail: {type(e).__name__}: {e}")
+        raise HTTPException(503, "Abhi PDF process nahi ho paayi. Thodi der baad dobara upload karein.")
+    return UploadResponse(**info)
+
+
+@app.delete("/upload")
+def delete_uploads(session_id: str):
+    _check_session(session_id)
+    return {"deleted_chunks": user_docs.delete_session(session_id)}
+

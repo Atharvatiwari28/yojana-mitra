@@ -6,6 +6,8 @@ google-genai
 numpy
 psycopg[binary]
 python-dotenv
+pypdf
+python-multipart
 
 # PDF processing scripts (extract/ocr/chunk, purana embed.py) sirf laptop pe chalte hain.
 # Unke liye alag se: pip install pypdf pymupdf pytesseract pillow sentence-transformers
